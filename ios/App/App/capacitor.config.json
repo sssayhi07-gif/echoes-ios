@@ -1,0 +1,10 @@
+{
+	"appId": "com.echoes.app",
+	"appName": "Echoes",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"ios": {
+		"contentInset": "always"
+	},
+	"packageClassList": []
+}
