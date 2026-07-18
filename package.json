@@ -1,0 +1,17 @@
+{
+  "name": "echoes-ios",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Echoes 網頁包裝成 iOS App(Capacitor)",
+  "scripts": {
+    "sync": "cap sync ios",
+    "open": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}

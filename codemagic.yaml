@@ -1,0 +1,33 @@
+workflows:
+  ios-unsigned-test:
+    name: Echoes - iOS 免簽章測試包
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      node: 20
+    scripts:
+      - name: 安裝 npm 套件
+        script: npm install
+      - name: 安裝 CocoaPods 依賴
+        script: |
+          cd ios/App
+          pod install
+      - name: 編譯(不簽章)
+        script: |
+          cd ios/App
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO
+      - name: 打包成 .ipa(未簽章,交給 Sideloadly / AltStore 重新簽)
+        script: |
+          cd ios/App/build/Build/Products/Release-iphoneos
+          mkdir Payload
+          cp -r App.app Payload/
+          zip -r "$CM_BUILD_DIR/Echoes-unsigned.ipa" Payload
+    artifacts:
+      - Echoes-unsigned.ipa
